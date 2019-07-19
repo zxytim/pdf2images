@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+
+import argparse
+import os
+import pdf
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(dest="pdf_file")
+    parser.add_argument(dest="output_dir")
+    parser.add_argument("--max-size", default=1280, type=int)
+    args = parser.parse_args()
+
+    with open(args.pdf_file, "rb") as f:
+        pdf_data = f.read()
+
+    num_pages = pdf.get_num_pages_given_path(args.pdf_file)
+
+    rst = pdf.pdf_data_to_thumbnails(
+        pdf_data, list(range(num_pages)), args.max_size, args.max_size
+    )
+
+    os.makedirs(args.output_dir, exist_ok=True)
+    for k, v in sorted(rst.items()):
+        output_path = os.path.join(args.output_dir, str(k) + ".png")
+        with open(output_path, "wb") as f:
+            f.write(v)
+
+
+if __name__ == "__main__":
+    main()
