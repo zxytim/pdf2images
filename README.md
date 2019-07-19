@@ -1,6 +1,20 @@
 # pdf2images
 Convert PDF file to image files **ROBUSTLY**.
 
+# Example
+```
+$ ./pdf2images.py -h
+usage: pdf2images.py [-h] [--max-size MAX_SIZE] pdf_file output_dir
+
+positional arguments:
+  pdf_file
+  output_dir
+
+optional arguments:
+  -h, --help           show this help message and exit
+  --max-size MAX_SIZE  max size of either side of the image
+```
+
 # Why another "pdf-to-image" package
 Once in a while, I need to convert a pdf file (usually slides or academic
 paper) into image files (thumbnails) in order to get a fast glance to the

@@ -9,7 +9,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(dest="pdf_file")
     parser.add_argument(dest="output_dir")
-    parser.add_argument("--max-size", default=1280, type=int)
+    parser.add_argument("--max-size", default=1280, type=int, 
+                        help='max size of either side of the image')
     args = parser.parse_args()
 
     with open(args.pdf_file, "rb") as f:
