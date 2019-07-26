@@ -10,7 +10,7 @@ with open("requirements.txt") as f:
 
 setuptools.setup(
     name="pdf2images",
-    version="0.0.1",
+    version="0.0.2",
     author="Xinyu Zhou",
     author_email="zxytim@gmail.com",
     description="Convert PDF file to image files ROBUSTLY.",
@@ -19,7 +19,8 @@ setuptools.setup(
     url="https://github.com/zxytim/pdf2images",
     packages=setuptools.find_packages(),
     install_requires=requirements,
-    python_requires='>=3.5',
+    python_requires=">=3.5",
+    scripts=["bin/pdf2images"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: BSD License",

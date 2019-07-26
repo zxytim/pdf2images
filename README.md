@@ -3,8 +3,8 @@ Convert PDF file to image files **ROBUSTLY**.
 
 # Example
 ```
-$ ./pdf2images.py -h
-usage: pdf2images.py [-h] [--max-size MAX_SIZE] pdf_file output_dir
+$ pdf2images -h
+usage: pdf2images [-h] [--max-size MAX_SIZE] pdf_file output_dir
 
 positional arguments:
   pdf_file
@@ -60,3 +60,11 @@ pip install pdf2images
 This package has successfully processed hundreds of thousands of arxiv papers
 (for generating thumbnails).
 
+
+# Gallary
+The following images are converted from a [slide](https://www.deeplearningbook.org/slides/02_linear_algebra.pdf) from [Deep Learning Book](https://www.deeplearningbook.org/lecture_slides.html)
+
+![page-0](assets/0.png)
+![page-1](assets/1.png)
+![page-2](assets/2.png)
+![page-3](assets/3.png)

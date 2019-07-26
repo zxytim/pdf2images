@@ -2,23 +2,23 @@
 
 import argparse
 import os
-import pdf
+import pdf2images
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(dest="pdf_file")
     parser.add_argument(dest="output_dir")
-    parser.add_argument("--max-size", default=1280, type=int, 
+    parser.add_argument("--max-size", default=1280, type=int,
                         help='max size of either side of the image')
     args = parser.parse_args()
 
     with open(args.pdf_file, "rb") as f:
         pdf_data = f.read()
 
-    num_pages = pdf.get_num_pages_given_path(args.pdf_file)
+    num_pages = pdf2images.get_num_pages_given_path(args.pdf_file)
 
-    rst = pdf.pdf_data_to_thumbnails(
+    rst = pdf2images.pdf_data_to_thumbnails(
         pdf_data, list(range(num_pages)), args.max_size, args.max_size
     )
 

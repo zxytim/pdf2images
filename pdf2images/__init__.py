@@ -14,9 +14,6 @@ from wand.image import Image
 from tqdm import tqdm
 
 
-__all__ = ["pdf_data_to_thumbnails", "pdf_data2text"]
-
-
 def pdf_data_to_thumbnails(
     pdf_data, pages, width_max, height_max, *, use_last_resort=True
 ):
