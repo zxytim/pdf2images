@@ -1,0 +1,4 @@
+preview_generator
+Wand
+plumbum
+tqdm

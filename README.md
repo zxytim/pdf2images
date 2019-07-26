@@ -29,6 +29,33 @@ one of them can process it successfully.
 
 So I combined (a.k.a. *ensemble*) them together to make it work across most cases.
 
+# Installation
+As mentioned above, we combined multiple pdf manipulation libraries. Here are
+the list of the libraries used:
+- [wand](http://docs.wand-py.org), an ImageMagick python wrapper.
+- `pdftotext` command line tool provided by [xpdf](http://www.xpdfreader.com/)
+- [preview-generator](https://github.com/algoo/preview-generator)
+- [qpdf](https://github.com/qpdf/qpdf)
+
+where wand and preview-generator are python packages that can be automatically
+installed along with pdf2images. However, you have to install xpdf and qpdf
+manually.
+
+On Ubuntu:
+```
+sudo apt install -y qpdf xpdf
+```
+
+On Arch Linux:
+```
+sudo pacman -S qpdf xpdf
+```
+
+The installation of pdf2images is quite simple:
+```
+pip install pdf2images
+```
+
 # Robustness
 This package has successfully processed hundreds of thousands of arxiv papers
 (for generating thumbnails).
