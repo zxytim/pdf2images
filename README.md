@@ -43,12 +43,12 @@ manually.
 
 On Ubuntu:
 ```
-sudo apt install -y qpdf xpdf
+sudo apt install -y qpdf xpdf libimage-exiftool-perl
 ```
 
 On Arch Linux:
 ```
-sudo pacman -S qpdf xpdf
+sudo pacman -S --noconfirm qpdf xpdf perl-image-exiftool
 ```
 
 The installation of pdf2images is quite simple:
