@@ -10,7 +10,7 @@ with open("requirements.txt") as f:
 
 setuptools.setup(
     name="pdf2images",
-    version="0.0.3",
+    version="0.0.4",
     author="Xinyu Zhou",
     author_email="zxytim@gmail.com",
     description="Convert PDF file to image files ROBUSTLY.",
