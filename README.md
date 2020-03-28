@@ -1,4 +1,6 @@
 # pdf2images
+[![Build Status](https://travis-ci.com/zxytim/pdf2images.svg?branch=master)](https://travis-ci.com/zxytim/pdf2images)
+
 Convert PDF file to image files **ROBUSTLY**.
 
 # Example
