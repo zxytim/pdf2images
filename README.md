@@ -51,6 +51,11 @@ On Arch Linux:
 sudo pacman -S --noconfirm qpdf xpdf perl-image-exiftool
 ```
 
+On macOS:
+```
+brew install freetype imagemagick qpdf xpdf exiftool libmagic ghostscript
+```
+
 The installation of pdf2images is quite simple:
 ```
 pip install pdf2images

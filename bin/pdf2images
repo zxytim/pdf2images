@@ -3,6 +3,7 @@
 import argparse
 import os
 import pdf2images
+from loguru import logger
 
 
 def main():

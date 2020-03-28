@@ -9,6 +9,7 @@ import subprocess
 from typing import List, Union
 import os
 import tempfile
+from loguru import logger
 
 from wand.image import Image
 from tqdm import tqdm
@@ -19,19 +20,21 @@ def pdf_data_to_thumbnails(
 ):
 
     pdf_thumbnailing_funcs = [
-        pdf_data_to_thumbnails_by_preview_generator,
-        pdf_data_to_thumbnails_by_imagemagick,
+        ('preview_generator', pdf_data_to_thumbnails_by_preview_generator),
+        ('imagemagick', pdf_data_to_thumbnails_by_imagemagick),
     ]
 
     if use_last_resort:
-        pdf_thumbnailing_funcs.append(pdf_data_to_thumbnails_by_qpdf)
+        pdf_thumbnailing_funcs.append(('qpdf', pdf_data_to_thumbnails_by_qpdf))
 
     exceptions = []
-    for func in pdf_thumbnailing_funcs:
+    for name, func in pdf_thumbnailing_funcs:
+        logger.info('Try using converter `{}`'.format(name))
         try:
             return func(pdf_data, pages, width_max, height_max)
         except Exception as e:
             traceback.print_exc()
+            logger.info('Converter `{}` failed'.format(name))
             exceptions.append(e)
     else:
         raise ValueError("Error generating thumbnails: ", exceptions)
@@ -73,8 +76,7 @@ def pdf_data_to_thumbnails_by_imagemagick(
 
         for idx in pages:
             blob = pdf_imgs.sequence[idx]
-            j = Image()
-            j.read(image=blob)
+            j = Image(blob)
             j.format = "jpg"
             j.transform(resize="{}x{}".format(width_max, height_max))
 
@@ -124,7 +126,10 @@ def pdf_data_to_thumbnails_by_preview_generator(pdf_data, pages, width_max, heig
                 pdf_path, width=width_max, height=height_max, page=page
             )
             with open(preview_path, "rb") as f:
-                rst[page] = f.read()
+                data = f.read()
+            if len(data) == 0:
+                raise ValueError('preview_generator gives zero-sized image')
+            rst[page] = data
     finally:
         shutil.rmtree(cache_dir)
 
@@ -175,7 +180,8 @@ def pdf_data_to_thumbnails_by_qpdf(pdf_data, pages, width_max, height_max):
         rst = {}
         for page, path in sorted(pdf_pages.items()):
             with open(path, "rb") as f:
-                out = pdf_data_to_thumbnails(f.read(), use_last_resort=False)
+                out = pdf_data_to_thumbnails(
+                    f.read(), pages=pages, use_last_resort=False, width_max=width_max, height_max=height_max)
 
             assert len(out) == 1, (len(out), page, path)
             rst[page] = list(out.values())[0]
