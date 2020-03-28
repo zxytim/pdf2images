@@ -103,7 +103,7 @@ def pdf_data_to_thumbnails_by_preview_generator(
     pdf_data: bytes, pages: List[int], width_max: int, height_max: int
 ):
     """
-    A more robust preview generator than imagemagick (wand).
+    Convert pdf data to images with preview generator, which is sometimes more robust.
 
     :param page: an int for one page or a list of ints for multiple pages
     :return: dict map from page number to encoded image of that page.

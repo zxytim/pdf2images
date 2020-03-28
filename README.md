@@ -6,16 +6,18 @@ Convert PDF file to image files **ROBUSTLY**.
 
 ## Example
 
-    $ pdf2images -h
-    usage: pdf2images [-h] [--max-size MAX_SIZE] pdf_file output_dir
+```
+$ pdf2images -h
+usage: pdf2images [-h] [--max-size MAX_SIZE] pdf_file output_dir
 
-    positional arguments:
-      pdf_file
-      output_dir
+positional arguments:
+  pdf_file
+  output_dir
 
-    optional arguments:
-      -h, --help           show this help message and exit
-      --max-size MAX_SIZE  max size of either side of the image
+optional arguments:
+  -h, --help           show this help message and exit
+  --max-size MAX_SIZE  max size of either side of the image
+```
 
 ## Why another "pdf-to-image" package
 
@@ -48,19 +50,27 @@ manually.
 
 On Ubuntu:
 
-    sudo apt install -y qpdf xpdf libimage-exiftool-perl poppler-utils
+```
+sudo apt install -y qpdf xpdf libimage-exiftool-perl poppler-utils
+```
 
 On Arch Linux:
 
-    sudo pacman -S --noconfirm qpdf xpdf perl-image-exiftool
+```
+sudo pacman -S --noconfirm qpdf xpdf perl-image-exiftool
+```
 
 On macOS:
 
-    brew install freetype imagemagick qpdf xpdf exiftool libmagic ghostscript
+```
+brew install freetype imagemagick qpdf xpdf exiftool libmagic ghostscript
+```
 
 The installation of pdf2images is quite simple:
 
-    pip install pdf2images
+```
+pip install pdf2images
+```
 
 ## Robustness
 
