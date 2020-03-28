@@ -6,7 +6,7 @@ Convert PDF file to image files **ROBUSTLY**.
 
 ## Example
 
-```
+```bash
 $ pdf2images -h
 usage: pdf2images [-h] [--max-size MAX_SIZE] pdf_file output_dir
 
@@ -50,25 +50,25 @@ manually.
 
 On Ubuntu:
 
-```
+```bash
 sudo apt install -y qpdf xpdf libimage-exiftool-perl poppler-utils
 ```
 
 On Arch Linux:
 
-```
+```bash
 sudo pacman -S --noconfirm qpdf xpdf perl-image-exiftool
 ```
 
 On macOS:
 
-```
+```bash
 brew install freetype imagemagick qpdf xpdf exiftool libmagic ghostscript
 ```
 
 The installation of pdf2images is quite simple:
 
-```
+```bash
 pip install pdf2images
 ```
 
