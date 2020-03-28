@@ -12,7 +12,7 @@ before_install:
     - pip install -U pip
     - pip install -U pytest
 install:
-    - [ "$TRAVIS_OS_NAME" = "linux" ] && sudo apt install -y qpdf xpdf libimage-exiftool-perl
+    - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt install -y qpdf xpdf libimage-exiftool-perl; fi
     - pip install -r requirements.txt -r requirements.dev.txt
 script:
     - make test
