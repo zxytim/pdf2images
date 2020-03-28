@@ -1,4 +1,6 @@
 language: python
+os:
+    - linux
 python:
     - 3.5
     - 3.6
@@ -7,9 +9,10 @@ python:
 cache: pip
 before_install:
     - python --version
-    - pip install -U pip --user
-    - pip install -U pytest --user
+    - pip install -U pip
+    - pip install -U pytest
 install:
-    - pip install -r requirements.txt -r requirements.dev.txt --user
+    - [ "$TRAVIS_OS_NAME" = "linux" ] && sudo apt install -y qpdf xpdf libimage-exiftool-perl
+    - pip install -r requirements.txt -r requirements.dev.txt
 script:
     - make test
