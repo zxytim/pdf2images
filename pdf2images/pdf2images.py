@@ -17,7 +17,8 @@ def pdf_data_to_thumbnails(
     *,
     use_last_resort: bool = True
 ) -> Dict[int, bytes]:
-    """Convert given pdf data to a set of images.
+    """
+    Convert given pdf data to a set of images.
 
     :return: a dict map from page number to the binary data of image (which can be directly write to disk)
     """
@@ -61,7 +62,8 @@ def pdf_data2text(pdf_data):
 def pdf_data_to_thumbnails_by_imagemagick(
     pdf_data: bytes, pages: List[int], width_max: int, height_max: int
 ):
-    """Convert pdf data to set of images using imagemagick (via wand).
+    """
+    Convert pdf data to set of images using imagemagick (via wand).
 
     :return: dict: index -> png_data
     """
@@ -100,7 +102,8 @@ def pdf_data_to_thumbnails_by_imagemagick(
 def pdf_data_to_thumbnails_by_preview_generator(
     pdf_data: bytes, pages: List[int], width_max: int, height_max: int
 ):
-    """A more robust preview generator than imagemagick (wand).
+    """
+    A more robust preview generator than imagemagick (wand).
 
     :param page: an int for one page or a list of ints for multiple pages
     :return: dict map from page number to encoded image of that page.

@@ -1,6 +1,4 @@
-"""
-Detect if system packages are installed and give
-friendly installation instruction if not.
+"""Detect if system packages are installed and give friendly installation instruction if not.
 """
 
 import platform
