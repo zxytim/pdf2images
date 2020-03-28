@@ -6,7 +6,7 @@ import traceback
 import functools
 import shutil
 import subprocess
-from typing import List, Union
+from typing import List, Union, Dict
 import os
 import tempfile
 from loguru import logger
@@ -16,8 +16,16 @@ from tqdm import tqdm
 
 
 def pdf_data_to_thumbnails(
-    pdf_data, pages, width_max, height_max, *, use_last_resort=True
-):
+    pdf_data: bytes,
+    pages: List[int],
+    width_max: int,
+    height_max: int,
+    *,
+    use_last_resort: bool = True
+) -> Dict[int, bytes]:
+    """
+    :return: a dict map from page number to the binary data of image (which can be directly write to disk)
+    """
 
     pdf_thumbnailing_funcs = [
         ("preview_generator", pdf_data_to_thumbnails_by_preview_generator),
@@ -55,7 +63,7 @@ def pdf_data2text(pdf_data):
 
 
 def pdf_data_to_thumbnails_by_imagemagick(
-    pdf_data: bytes, pages: List[int], width_max, height_max
+    pdf_data: bytes, pages: List[int], width_max: int, height_max: int
 ):
     """This is quite buggy.
     :return: dict: index -> png_data
@@ -92,7 +100,9 @@ def pdf_data_to_thumbnails_by_imagemagick(
     return rst
 
 
-def pdf_data_to_thumbnails_by_preview_generator(pdf_data, pages, width_max, height_max):
+def pdf_data_to_thumbnails_by_preview_generator(
+    pdf_data: bytes, pages: List[int], width_max: int, height_max: int
+):
     """A more robust preview generator than imagemagick (wand).
 
     :param page: an int for one page or a list of ints for multiple pages
@@ -136,7 +146,9 @@ def pdf_data_to_thumbnails_by_preview_generator(pdf_data, pages, width_max, heig
     return rst
 
 
-def pdf_data_to_thumbnails_by_qpdf(pdf_data, pages, width_max, height_max):
+def pdf_data_to_thumbnails_by_qpdf(
+    pdf_data: bytes, pages: List[int], width_max: int, height_max: int
+):
     # `qpdf` seems quite robust at reading PDF files than other libraries.  It is
     # the last-resort we have: splitting pdf into a set of
     # one-page pdfs, and then creating thumbnails one-by-one.
@@ -196,7 +208,7 @@ def pdf_data_to_thumbnails_by_qpdf(pdf_data, pages, width_max, height_max):
         shutil.rmtree(tempdir)
 
 
-def get_num_pages_given_path(pdf_path):
+def get_num_pages_given_path(pdf_path: str):
     from plumbum.cmd import qpdf
 
     # retcode=3: suppress error of

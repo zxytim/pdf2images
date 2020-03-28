@@ -15,3 +15,10 @@ class TestPDF2Images(unittest.TestCase):
 
     def test_basics(self):
         self.assertEqual(pdf2images.get_num_pages_given_path(self.pdf_path), 175)
+        rst = pdf2images.pdf_data_to_thumbnails(
+            self.pdf_data, [0, 1, 2, 4, 8, 16, 32, 174], 100, 200
+        )
+
+        self.assertEqual(len(rst), 8)
+        for pageno, data in rst.items():
+            self.assertGreater(len(data), 0)
