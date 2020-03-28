@@ -20,5 +20,5 @@ class TestPDF2Images(unittest.TestCase):
         )
 
         self.assertEqual(len(rst), 8)
-        for pageno, data in rst.items():
+        for data in rst.values():
             self.assertGreater(len(data), 0)

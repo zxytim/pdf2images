@@ -3,3 +3,5 @@ from .pdf2images import pdf_data_to_thumbnails, pdf_data2text, get_num_pages_giv
 from .packdet import check_system_packages
 
 check_system_packages()
+
+__all__ = ["pdf_data_to_thumbnails", "pdf_data2text", "get_num_pages_given_path"]

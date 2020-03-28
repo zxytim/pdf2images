@@ -1,18 +1,12 @@
 import io
-import time
-import itertools
-import collections
 import traceback
-import functools
 import shutil
-import subprocess
-from typing import List, Union, Dict
+from typing import List, Dict
 import os
 import tempfile
 from loguru import logger
 
 from wand.image import Image
-from tqdm import tqdm
 
 
 def pdf_data_to_thumbnails(
@@ -23,7 +17,7 @@ def pdf_data_to_thumbnails(
     *,
     use_last_resort: bool = True
 ) -> Dict[int, bytes]:
-    """
+    """Convert given pdf data to a set of images.
     :return: a dict map from page number to the binary data of image (which can be directly write to disk)
     """
 
@@ -44,8 +38,9 @@ def pdf_data_to_thumbnails(
             traceback.print_exc()
             logger.info("Converter `{}` failed".format(name))
             exceptions.append(e)
-    else:
-        raise ValueError("Error generating thumbnails: ", exceptions)
+
+    # if not returned
+    raise ValueError("Error generating thumbnails: ", exceptions)
 
 
 # generate pdf text for search
@@ -65,7 +60,7 @@ def pdf_data2text(pdf_data):
 def pdf_data_to_thumbnails_by_imagemagick(
     pdf_data: bytes, pages: List[int], width_max: int, height_max: int
 ):
-    """This is quite buggy.
+    """Convert pdf data to set of images using imagemagick (via wand)
     :return: dict: index -> png_data
     """
     rst = {}

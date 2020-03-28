@@ -5,7 +5,6 @@ friendly installation instruction if not.
 
 import platform
 import distro
-import subprocess
 from loguru import logger
 import os
 import json
