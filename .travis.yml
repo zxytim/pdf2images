@@ -15,6 +15,7 @@ addons:
             - qpdf
             - xpdf
             - libimage-exiftool-perl
+            - poppler-utils
 before_install:
     - python --version
     - pip install -U pip
