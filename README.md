@@ -1,5 +1,5 @@
 # pdf2images
-[![Build Status](https://travis-ci.com/zxytim/pdf2images.svg?branch=master)](https://travis-ci.com/zxytim/pdf2images)
+[![Build Status](https://travis-ci.com/zxytim/pdf2images.svg?branch=master)](https://travis-ci.com/zxytim/pdf2images) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/0d229594113d431fb2d97adeb8cd0f7d)](https://www.codacy.com/manual/zxytim/pdf2images?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=zxytim/pdf2images&amp;utm_campaign=Badge_Grade)
 
 Convert PDF file to image files **ROBUSTLY**.
 
