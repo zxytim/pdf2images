@@ -1,6 +1,7 @@
 language: python
 os:
     - linux
+    - osx
 dist: bionic
 python:
     - 3.6
@@ -16,6 +17,15 @@ addons:
             - xpdf
             - libimage-exiftool-perl
             - poppler-utils
+    homebrew:
+        packages:
+            - freetype
+            - imagemagick
+            - qpdf
+            - xpdf
+            - exiftool
+            - libmagic
+            - ghostscript
 before_install:
     - python --version
     - pip install -U pip
