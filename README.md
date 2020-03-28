@@ -25,7 +25,7 @@ pdf files, since many pdf files are in non-standard format or come up with
 extensions. They are always broken in some cases.
 
 But to look them on the bright side, for any plausible case, there is almost
-one of them can process it successfully. 
+one of them can process it successfully.
 
 So I combined (a.k.a. *ensemble*) them together to make it work across most cases.
 
@@ -73,3 +73,9 @@ The following images are converted from a [slide](https://www.deeplearningbook.o
 ![page-1](assets/1.png)
 ![page-2](assets/2.png)
 ![page-3](assets/3.png)
+
+# Development
+```
+pip3 install -r requirements.dev.txt
+pre-commit install
+```

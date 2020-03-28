@@ -1,6 +1,6 @@
-preview_generator>=0.13
-Wand>=0.5.9
-plumbum>=1.6.8cv
-tqdm>=4.41.0
-loguru>=0.4.0
 distro>=1.4.0
+loguru>=0.4.0
+plumbum>=1.6.8cv
+preview_generator>=0.13
+tqdm>=4.41.0
+Wand>=0.5.9

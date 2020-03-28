@@ -16,7 +16,7 @@ from plumbum import RETCODE
 def assert_system_supported():
     p = platform.system()
     if p not in {"Linux", "Darwin"}:
-        raise OSError("This package only works on Linux and macOS: `{}`".format(p)) 
+        raise OSError("This package only works on Linux and macOS: `{}`".format(p))
 
 
 def check_system_package_exists_archlinux(package: str):
@@ -36,7 +36,7 @@ def check_system_package_exists_debian(package: str):
 def check_system_package_exists_darwin(package: str):
     from plumbum.cmd import brew
 
-    retcode = brew['list', package] & RETCODE
+    retcode = brew["list", package] & RETCODE
     return retcode == 0
 
 
@@ -45,33 +45,47 @@ def get_configurations():
     arch_conf = {
         "packages": arch_packages,
         "check_system_package_exists": check_system_package_exists_archlinux,
-        "install_instruction": "sudo pacman -Sy && sudo pacman -S --noconfirm {}".format(' '.join(arch_packages)),
+        "install_instruction": "sudo pacman -Sy && sudo pacman -S --noconfirm {}".format(
+            " ".join(arch_packages)
+        ),
     }
-
 
     debian_packages = ["qpdf", "xpdf", "libimage-exiftool-perl"]
     debian_conf = {
         "packages": debian_packages,
         "check_system_package_exists": check_system_package_exists_debian,
-        "install_instruction": "sudo apt update && sudo apt install -y {}".format(' '.join(debian_packages)),
+        "install_instruction": "sudo apt update && sudo apt install -y {}".format(
+            " ".join(debian_packages)
+        ),
     }
-
 
     # a.k.a, macOS
-    darwin_packages = ['freetype', 'imagemagick', 'qpdf', 'xpdf', 'exiftool', 'libmagic', 'ghostscript']
+    darwin_packages = [
+        "freetype",
+        "imagemagick",
+        "qpdf",
+        "xpdf",
+        "exiftool",
+        "libmagic",
+        "ghostscript",
+    ]
     darwin_conf = {
-        'packages': darwin_packages,
-        'check_system_package_exists': check_system_package_exists_darwin,
-        'install_instruction': 'brew install {}'.format(' '.join(darwin_packages)),
+        "packages": darwin_packages,
+        "check_system_package_exists": check_system_package_exists_darwin,
+        "install_instruction": "brew install {}".format(" ".join(darwin_packages)),
     }
 
-    return {"arch": arch_conf, "debian": debian_conf, "ubuntu": debian_conf,
-            'darwin': darwin_conf}
+    return {
+        "arch": arch_conf,
+        "debian": debian_conf,
+        "ubuntu": debian_conf,
+        "darwin": darwin_conf,
+    }
 
 
+CACHE_DIR = os.path.join(os.path.expanduser("~"), ".cache", "pdf2images")
+CACHE_PATH = os.path.join(CACHE_DIR, "package_check.json")
 
-CACHE_DIR = os.path.join(os.path.expanduser('~'), '.cache', 'pdf2images')
-CACHE_PATH = os.path.join(CACHE_DIR, 'package_check.json')
 
 def check_system_packages_exist_from_cache(dist: str):
     try:
@@ -81,13 +95,14 @@ def check_system_packages_exist_from_cache(dist: str):
         with open(CACHE_PATH) as f:
             cache = json.load(f)
 
-        if cache.get(dist, {}).get('ok', False):
+        if cache.get(dist, {}).get("ok", False):
             return True
         return False
-    except Exception as e:
+    except Exception:
         import traceback
+
         traceback.print_exc()
-        logger.info('Check system packages exist from cache failed.')
+        logger.info("Check system packages exist from cache failed.")
         return False
 
 
@@ -95,18 +110,18 @@ def store_system_package_exists_cache(dist: str):
     if not os.path.exists(CACHE_DIR):
         os.makedirs(CACHE_DIR, exist_ok=True)
 
-    with open(CACHE_PATH, 'w') as f:
-        json.dump({dist: {'ok': True}}, f)
+    with open(CACHE_PATH, "w") as f:
+        json.dump({dist: {"ok": True}}, f)
 
 
 def check_system_packages():
     assert_system_supported()
 
     dist = distro.linux_distribution(full_distribution_name=False)[0]
-    logger.info('check 1')
+    logger.info("check 1")
     if check_system_packages_exist_from_cache(dist):
         return True
-    logger.info('check 2')
+    logger.info("check 2")
 
     confs = get_configurations()
     if dist not in confs:

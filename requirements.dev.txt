@@ -1,0 +1,12 @@
+
+autoflake
+black
+flake8
+isort
+m2r
+pre-commit
+
+pytest
+pytest-cov
+radon
+seed-isort-config
