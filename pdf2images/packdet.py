@@ -118,10 +118,8 @@ def check_system_packages():
     assert_system_supported()
 
     dist = distro.linux_distribution(full_distribution_name=False)[0]
-    logger.info("check 1")
     if check_system_packages_exist_from_cache(dist):
         return True
-    logger.info("check 2")
 
     confs = get_configurations()
     if dist not in confs:
