@@ -7,12 +7,19 @@ python:
     - 3.7
     - 3.8
 cache: pip
+addons:
+    apt:
+        update:
+            - true
+        packages:
+            - qpdf
+            - xpdf
+            - libimage-exiftool-perl
 before_install:
     - python --version
     - pip install -U pip
     - pip install -U pytest
 install:
-    - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt update; sudo apt install -y qpdf xpdf libimage-exiftool-perl; fi
     - pip install -r requirements.txt -r requirements.dev.txt
 script:
     - make test
