@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
     python: circleci/python@0.2.1
+    codecov: codecov/codecov@1.0.2
 jobs:
     build:
         docker:
@@ -8,11 +9,13 @@ jobs:
         steps:
             - checkout
             - python/load-cache
-            - run: sudo apt update 
+            - run: sudo apt update
             - run: sudo apt install -y qpdf xpdf libimage-exiftool-perl poppler-utils
             - run: pip install --user -r requirements.txt -r requirements.dev.txt
             - python/save-cache
             - run: make test
+            - codecov/upload:
+                file: htmlcov
             - store_test_results:
                 path: test-results
             - store_artifacts:
