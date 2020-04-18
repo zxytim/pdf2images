@@ -14,8 +14,7 @@ jobs:
             - run: pip install --user -r requirements.txt -r requirements.dev.txt
             - python/save-cache
             - run: make test
-            - codecov/upload:
-                file: htmlcov
+            - codecov/upload
             - store_test_results:
                 path: test-results
             - store_artifacts:
