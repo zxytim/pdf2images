@@ -5,7 +5,7 @@ style-check:
 	flake8 --ignore E501,E203,F401,W503,W504 --radon-max-cc 13 pdf2images bin tests
 
 test:
-	pytest \
+	python3 -m pytest \
 	    --cov=pdf2images \
 	    --no-cov-on-fail \
 	    --cov-report=html:htmlcov \
