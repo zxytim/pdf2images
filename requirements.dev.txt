@@ -1,6 +1,7 @@
 
 autoflake
 black
+coverage
 flake8
 isort
 m2r
