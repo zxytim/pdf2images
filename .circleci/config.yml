@@ -10,8 +10,14 @@ jobs:
             - python/load-cache
             - run: sudo apt update
             - run: sudo apt install -y qpdf xpdf libimage-exiftool-perl poppler-utils
+
+            # don't install black in python 3.5
+            - run: python3 --version | grep 'Python 3.5.' > /dev/null && sed -e 's/^black$//g' -i requirements.dev.txt
             - run: pip install --user -r requirements.txt -r requirements.dev.txt
             - python/save-cache
+
+            # disable style check for python 3.5 (black unavailable)
+            - run: python3 --version | grep 'Python 3.5.' > /dev/null || make style-check
             - run: make test
             - run: bash <(curl -s https://codecov.io/bash)
             - store_test_results:
@@ -21,11 +27,11 @@ jobs:
     build-python35:
         <<: *common-build
         docker:
-            - image: circleci/python:3.5.9-stretch
+            - image: circleci/python:3.5.7-jessie
     build-python36:
         <<: *common-build
         docker:
-            - image: circleci/python:3.6.10-jessie
+            - image: circleci/python:3.6.8-jessie
     build-python37:
         <<: *common-build
         docker:
