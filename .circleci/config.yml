@@ -15,7 +15,7 @@ jobs:
             - run: make test
             - run:
                 command: |
-                    coverage xml
+                    python3 -m coverage xml
                     bash <(curl -s https://codecov.io/bash)
             - store_test_results:
                 path: test-results
