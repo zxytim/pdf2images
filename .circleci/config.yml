@@ -2,9 +2,9 @@ version: 2.1
 orbs:
     python: circleci/python@0.2.1
 jobs:
-    build:
+    build: &common-build
         docker:
-            - image: circleci/python:3.6.7-jessie
+            - image: circleci/python
         steps:
             - checkout
             - python/load-cache
@@ -18,9 +18,28 @@ jobs:
                 path: test-results
             - store_artifacts:
                 path: test-results
+    build-python35:
+        <<: *common-build
+        docker:
+            - image: circleci/python:3.5.9-stretch
+    build-python36:
+        <<: *common-build
+        docker:
+            - image: circleci/python:3.6.10-jessie
+    build-python37:
+        <<: *common-build
+        docker:
+            - image: circleci/python:3.7.7-stretch
+    build-python38:
+        <<: *common-build
+        docker:
+            - image: circleci/python:3.8.2-buster
+
 workflows:
     version: 2
-
-    main:
+    build:
         jobs:
-            - build
+            - build-python35
+            - build-python36
+            - build-python37
+            - build-python38
