@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
     python: circleci/python@0.2.1
-    codecov: codecov/codecov@1.0.2
 jobs:
     build:
         docker:
@@ -14,8 +13,7 @@ jobs:
             - run: pip install --user -r requirements.txt -r requirements.dev.txt
             - python/save-cache
             - run: make test
-            - codecov/upload:
-                file: .
+            - run: bash <(curl -s https://codecov.io/bash)
             - store_test_results:
                 path: test-results
             - store_artifacts:
