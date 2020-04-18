@@ -9,7 +9,7 @@ test:
 	python3 -m pytest \
 	    --cov=pdf2images \
 	    --no-cov-on-fail \
-	    --cov-report=html:htmlcov \
+	    --cov-report=html:test-results/htmlcov \
 	    --cov-report term \
 	    --doctest-modules \
 	    --junitxml=test-results/junit.xml \
