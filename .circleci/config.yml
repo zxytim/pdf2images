@@ -21,7 +21,6 @@ jobs:
                 path: test-results
             - store_artifacts:
                 path: test-results
-                destiation: tr1
 workflows:
     version: 2
 
