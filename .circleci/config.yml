@@ -13,10 +13,7 @@ jobs:
             - run: pip install --user -r requirements.txt -r requirements.dev.txt
             - python/save-cache
             - run: make test
-            - run:
-                command: |
-                    python3 -m coverage xml
-                    bash <(curl -s https://codecov.io/bash)
+            - run: bash <(curl -s https://codecov.io/bash)
             - store_test_results:
                 path: test-results
             - store_artifacts:
